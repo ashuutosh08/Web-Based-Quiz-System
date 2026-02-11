@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Competition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Quiz Competition</h2>
+        <div id="startArea">
+            <label>Select Subject:</label>
+            <select id="subjectSelect">
+                <option value="">--Select--</option>
+                <option value="os">Operating System</option>
+                <option value="python">Python</option>
+                <option value="science">Science</option>
+                <option value="reasoning">Reasoning</option>
+                <option value="ds">Data Structure</option>
+            </select>
+            <button onclick="startQuiz()">Start Quiz</button>
+        </div>
+        <div id="quizArea" class="hide">
+            <h3 id="questionText"></h3>
+            <button class="optBtn" onclick="selectOption(1)" id="opt1"></button><br>
+            <button class="optBtn" onclick="selectOption(2)" id="opt2"></button><br>
+            <button class="optBtn" onclick="selectOption(3)" id="opt3"></button><br>
+            <button class="optBtn" onclick="selectOption(4)" id="opt4"></button><br>
+            <button class="controlBtn" onclick="nextQuestion()">Skip</button>
+            <button class="controlBtn" onclick="submitQuiz()">Submit Now</button>
+        </div>
+        <div id="resultArea" class="hide">
+            <h2>Quiz Completed</h2>
+            <h3 id="scoreText"></h3>
+            <button onclick="location.reload()">Restart</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
