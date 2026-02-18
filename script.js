@@ -128,11 +128,17 @@ function startQuiz() {
 
 function loadQuestion() {
     let q = questions[selectedSubject][index];
-    document.getElementById("questionText").innerText = (index+1)+". "+q.q;
-    document.getElementById("opt1").innerText = "1) "+q.o[0];
-    document.getElementById("opt2").innerText = "2) "+q.o[1];
-    document.getElementById("opt3").innerText = "3) "+q.o[2];
-    document.getElementById("opt4").innerText = "4) "+q.o[3];
+    document.getElementById("questionText").innerText = q.q;
+    document.getElementById("opt1").innerText = "1) " + q.o[0];
+    document.getElementById("opt2").innerText = "2) " + q.o[1];
+    document.getElementById("opt3").innerText = "3) " + q.o[2];
+    document.getElementById("opt4").innerText = "4) " + q.o[3];
+
+    let totalQuestions = questions[selectedSubject].length;
+    let currentQuestion = index + 1;
+    document.getElementById("questionCount").innerText = currentQuestion + " of " + totalQuestions;
+    let percentage = (currentQuestion / totalQuestions) * 100;
+    document.getElementById("progressBar").style.width = percentage + "%";
 }
 
 function selectOption(option) {
@@ -155,4 +161,25 @@ function submitQuiz() {
     document.getElementById("quizArea").classList.add("hide");
     document.getElementById("resultArea").classList.remove("hide");
     document.getElementById("scoreText").innerText = "Your Score: " + score + "/" + questions[selectedSubject].length;
+}
+
+function toggleDropdown() {
+    document.getElementById("optionsList").classList.toggle("hide");
+}
+
+function selectItem(value, text) {
+    document.querySelector(".selected-display").innerText = text;
+    document.getElementById("subjectSelect").value = value;
+    document.getElementById("optionsList").classList.add("hide");
+}
+
+window.onclick = function(event) {
+    if (!event.target.matches('.selected-display')) {
+        var dropdowns = document.getElementsByClassName("options-list");
+        for (var i = 0; i < dropdowns.length; i++) {
+            if (!dropdowns[i].classList.contains('hide')) {
+                dropdowns[i].classList.add('hide');
+            }
+        }
+    }
 }

@@ -9,30 +9,56 @@
     <div class="container">
         <h2>Quiz Competition</h2>
         <div id="startArea">
-            <label>Select Subject:</label>
-            <select id="subjectSelect">
-                <option value="">--Select--</option>
-                <option value="os">Operating System</option>
-                <option value="python">Python</option>
-                <option value="science">Science</option>
-                <option value="reasoning">Reasoning</option>
-                <option value="ds">Data Structure</option>
-            </select>
-            <button onclick="startQuiz()">Start Quiz</button>
+            <div class="icon-header">🚀</div>
+            <h1 class="main-title">Quiz<span class="highlight">Master</span></h1>
+            <p class="sub-text">Test your skills in Python, OS, Science & more!</p>
+            
+            <div class="input-group">
+                <label>Choose Your Challenge:</label>
+                
+                <div class="custom-dropdown">
+                    <div class="selected-display" onclick="toggleDropdown()">-- Select Subject --</div>
+                    
+                    <div class="options-list hide" id="optionsList">
+                        <div class="option-item" onclick="selectItem('os', 'Operating System')">Operating System</div>
+                        <div class="option-item" onclick="selectItem('python', 'Python Programming')">Python Programming</div>
+                        <div class="option-item" onclick="selectItem('science', 'General Science')">General Science</div>
+                        <div class="option-item" onclick="selectItem('reasoning', 'Logical Reasoning')">Logical Reasoning</div>
+                        <div class="option-item" onclick="selectItem('ds', 'Data Structures')">Data Structures</div>
+                    </div>
+
+                    <input type="hidden" id="subjectSelect" value="">
+                </div>
+            </div>
+
+            <button onclick="startQuiz()" class="pulse-btn">Let's Play!</button>
         </div>
         <div id="quizArea" class="hide">
+            
+            <div class="quiz-header">
+                <span id="questionCount">1 of 10</span>
+                <div class="progress-container">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+            </div>
+
             <h3 id="questionText"></h3>
             <button class="optBtn" onclick="selectOption(1)" id="opt1"></button><br>
             <button class="optBtn" onclick="selectOption(2)" id="opt2"></button><br>
             <button class="optBtn" onclick="selectOption(3)" id="opt3"></button><br>
             <button class="optBtn" onclick="selectOption(4)" id="opt4"></button><br>
+            
             <button class="controlBtn" onclick="nextQuestion()">Skip</button>
             <button class="controlBtn" onclick="submitQuiz()">Submit Now</button>
         </div>
         <div id="resultArea" class="hide">
-            <h2>Quiz Completed</h2>
-            <h3 id="scoreText"></h3>
-            <button onclick="location.reload()">Restart</button>
+            <div class="result-header">🏆</div>
+            <h2>Quiz Completed!</h2>
+            <div class="score-box">
+                <h3 id="scoreText">Your Score: 0/0</h3>
+            </div>
+            <p class="feedback-text">Great effort! Keep learning.</p>
+            <button class="controlBtn" onclick="location.reload()">Restart Quiz</button>
         </div>
     </div>
     <script src="script.js"></script>
