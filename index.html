@@ -2,65 +2,217 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Quiz Competition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizlyWeb Local</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h2>Quiz Competition</h2>
-        <div id="startArea">
-            <div class="icon-header">🚀</div>
-            <h1 class="main-title">Quiz<span class="highlight">Master</span></h1>
-            <p class="sub-text">Test your skills in Python, OS, Science & more!</p>
-            
-            <div class="input-group">
-                <label>Choose Your Challenge:</label>
-                
-                <div class="custom-dropdown">
-                    <div class="selected-display" onclick="toggleDropdown()">-- Select Subject --</div>
-                    
-                    <div class="options-list hide" id="optionsList">
-                        <div class="option-item" onclick="selectItem('os', 'Operating System')">Operating System</div>
-                        <div class="option-item" onclick="selectItem('python', 'Python Programming')">Python Programming</div>
-                        <div class="option-item" onclick="selectItem('science', 'General Science')">General Science</div>
-                        <div class="option-item" onclick="selectItem('reasoning', 'Logical Reasoning')">Logical Reasoning</div>
-                        <div class="option-item" onclick="selectItem('ds', 'Data Structures')">Data Structures</div>
+        <!-- Landing/Intro Page -->
+        <section id="introArea" class="introArea">
+            <div class="introContent">
+                <div class="introVisual">
+                    <div class="floatingIcon icon-one">📚</div>
+                    <div class="floatingIcon icon-two">✨</div>
+                    <div class="floatingIcon icon-three">🎯</div>
+                </div>
+                <h1 class="introTitle">Quizly<span class="highlight">Web</span></h1>
+                <p class="introSubtitle">Transform Your Notes Into Practice Tests</p>
+                <p class="introDescription">
+                    Upload your study notes as TXT or paste text instantly to generate realistic multiple-choice questions. Practice like you're preparing for the real exam.
+                </p>
+                <div class="introFeatures">
+                    <div class="featureRow">
+                        <span class="featureIcon">📄</span>
+                        <span>Upload TXT notes</span>
                     </div>
+                    <div class="featureRow">
+                        <span class="featureIcon">🤖</span>
+                        <span>AI-powered question generation</span>
+                    </div>
+                    <div class="featureRow">
+                        <span class="featureIcon">⏱️</span>
+                        <span>Timed practice sessions</span>
+                    </div>
+                    <div class="featureRow">
+                        <span class="featureIcon">📊</span>
+                        <span>Track your progress</span>
+                    </div>
+                </div>
+                <div class="introActions">
+                    <div id="introNotLoggedIn" class="introActionGroup">
+                        <button id="introLoginBtn" class="controlBtn">Login</button>
+                        <button id="introSignupBtn" class="controlBtn signupBtn">Sign Up</button>
+                    </div>
+                    <div id="introLoggedIn" class="introActionGroup hide">
+                        <p class="introLoggedInText">Welcome back, <span id="introUserName"></span>!</p>
+                        <button id="introContinueBtn" class="controlBtn">Continue to App</button>
+                    </div>
+                </div>
+                <p class="introFooterText">No downloads. No sign-ups required. Everything stays on your device.</p>
+            </div>
+        </section>
 
-                    <input type="hidden" id="subjectSelect" value="">
+        <!-- Auth Area (hidden initially) -->
+        <section id="authArea" class="panel hide">
+            <div class="auth-switch">
+                <button id="showLoginBtn" class="smallBtn active">Login</button>
+                <button id="showSignupBtn" class="smallBtn">Sign Up</button>
+            </div>
+
+            <div class="noticeBox">
+                Data Notice: This app stores profile, progress, and history only in this browser. Clearing browser cache/site data, using private mode, or changing browser/device can permanently remove your data.
+            </div>
+
+            <form id="loginForm" class="formGrid">
+                <label>Email
+                    <input id="loginEmail" type="email" required>
+                </label>
+                <label>4-digit PIN
+                    <input id="loginPin" type="password" inputmode="numeric" maxlength="4" required>
+                </label>
+                <button type="submit" class="controlBtn">Login</button>
+                <button type="button" id="showRecoveryBtn" class="ghostBtn">Forgot PIN</button>
+            </form>
+
+            <form id="signupForm" class="formGrid hide">
+                <label>Name
+                    <input id="signupName" type="text" required>
+                </label>
+                <label>Email
+                    <input id="signupEmail" type="email" required>
+                </label>
+                <label>4-digit PIN
+                    <input id="signupPin" type="password" inputmode="numeric" maxlength="4" required>
+                </label>
+                <label>Confirm PIN
+                    <input id="signupPinConfirm" type="password" inputmode="numeric" maxlength="4" required>
+                </label>
+                <label>Recovery Question
+                    <input id="recoveryQuestion" type="text" placeholder="Example: your favorite teacher?" required>
+                </label>
+                <label>Recovery Answer
+                    <input id="recoveryAnswer" type="text" required>
+                </label>
+                <button type="submit" class="controlBtn">Create Profile</button>
+            </form>
+
+            <form id="recoveryForm" class="formGrid hide">
+                <label>Email
+                    <input id="recoveryEmail" type="email" required>
+                </label>
+                <p id="recoveryQuestionPreview" class="mutedText"></p>
+                <button type="button" id="loadRecoveryQuestionBtn" class="ghostBtn">Load Recovery Question</button>
+                <label>Answer
+                    <input id="recoveryAnswerInput" type="text" required>
+                </label>
+                <label>New 4-digit PIN
+                    <input id="newPin" type="password" inputmode="numeric" maxlength="4" required>
+                </label>
+                <button type="submit" class="controlBtn">Reset PIN</button>
+            </form>
+        </section>
+
+        <section id="appArea" class="hide">
+            <div id="topBar" class="topBar">
+                <div>
+                    <p class="mutedText">Logged in as</p>
+                    <h2 id="userTitle"></h2>
+                </div>
+                <div class="topActions">
+                    <button id="logoutBtn" class="ghostBtn">Logout</button>
                 </div>
             </div>
 
-            <button onclick="startQuiz()" class="pulse-btn">Let's Play!</button>
-        </div>
-        <div id="quizArea" class="hide">
-            
-            <div class="quiz-header">
-                <span id="questionCount">1 of 10</span>
-                <div class="progress-container">
-                    <div id="progressBar" class="progress-bar"></div>
-                </div>
-            </div>
+            <section id="setupArea" class="panel">
+                <h3>1) Upload Resource</h3>
+                <label id="uploadTriggerBtn" class="fileLikeBtn blockBtn">
+                    Choose TXT (max 5 MB)
+                    <input id="resourceInput" type="file" accept=".txt" class="hide">
+                </label>
+                <p id="fileMeta" class="mutedText">No file selected.</p>
 
-            <h3 id="questionText"></h3>
-            <button class="optBtn" onclick="selectOption(1)" id="opt1"></button><br>
-            <button class="optBtn" onclick="selectOption(2)" id="opt2"></button><br>
-            <button class="optBtn" onclick="selectOption(3)" id="opt3"></button><br>
-            <button class="optBtn" onclick="selectOption(4)" id="opt4"></button><br>
-            
-            <button class="controlBtn" onclick="nextQuestion()">Skip</button>
-            <button class="controlBtn" onclick="submitQuiz()">Submit Now</button>
-        </div>
-        <div id="resultArea" class="hide">
-            <div class="result-header">🏆</div>
-            <h2>Quiz Completed!</h2>
-            <div class="score-box">
-                <h3 id="scoreText">Your Score: 0/0</h3>
-            </div>
-            <p class="feedback-text">Great effort! Keep learning.</p>
-            <button class="controlBtn" onclick="location.reload()">Restart Quiz</button>
-        </div>
+                <div class="textInputBlock">
+                    <div class="panelHeaderRow">
+                        <h3>2) Paste Text</h3>
+                        <button id="pasteClipboardBtn" type="button" class="ghostBtn">Paste from Clipboard</button>
+                    </div>
+                    <textarea id="manualTextInput" class="pasteTextArea" rows="8" placeholder="Paste your notes text here..."></textarea>
+                    <p class="pasteHintText">Tip: You can use Ctrl+V directly inside this box.</p>
+                </div>
+
+                <div class="settingsRow">
+                    <div class="settingGroup">
+                        <label class="settingLabel">Question Quantity:</label>
+                        <div class="quantityButtons">
+                            <button type="button" class="quantityBtn active" data-quantity="10">10</button>
+                            <button type="button" class="quantityBtn" data-quantity="12">12</button>
+                            <button type="button" class="quantityBtn" data-quantity="15">15</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rowActions">
+                    <button id="generateBtn" class="controlBtn">3) Generate Questions</button>
+                    <button id="startQuizBtn" class="controlBtn startQuizBtn hide" disabled>4) Start Quiz</button>
+                </div>
+                <p id="statusText" class="mutedText"></p>
+            </section>
+
+            <section id="scoreHistoryArea" class="panel">
+                <h3>📊 Score History (Last 10)</h3>
+                <div id="scoreHistoryList" class="scoreHistoryList"></div>
+            </section>
+
+            <section id="quizArea" class="panel hide">
+                <div class="quizHeader">
+                    <div class="quizHeaderTop">
+                        <h2 class="quizTitle">Quiz Competition</h2>
+                        <div class="questionTracker">
+                            <span id="questionCounter">0 of 0</span>
+                        </div>
+                    </div>
+                    <div class="progressBarContainer">
+                        <div id="progressBar" class="progressBar"></div>
+                    </div>
+                </div>
+                <h3 id="questionText"></h3>
+                <div id="optionsWrap" class="optionsWrap"></div>
+                <div class="rowActions">
+                    <button id="skipBtn" class="ghostBtn">Skip</button>
+                    <button id="submitBtn" class="controlBtn inlineBtn">Submit Now</button>
+                </div>
+            </section>
+
+            <section id="resultArea" class="panel hide">
+                <div class="resultSimple">
+                    <div class="trophyIcon" aria-hidden="true">🏆</div>
+                    <h2>Quiz Completed!</h2>
+                    <div class="score-box resultScoreBox">
+                        <h3 id="scoreText">Your Score: 0/0</h3>
+                    </div>
+                    <p id="resultMeta" class="mutedText"></p>
+                    <button id="retryBtn" class="controlBtn resultRestartBtn">Restart Quiz</button>
+                    <button id="uploadNewBtn" class="ghostBtn resultSecondaryBtn">Home</button>
+                </div>
+            </section>
+
+            <section id="attemptsArea" class="panel hide">
+                <h3>Recent Attempts (last 50)</h3>
+                <div id="attemptList" class="attemptList"></div>
+            </section>
+        </section>
+
+        <footer class="appFooter">
+            <a class="githubLink" href="https://github.com/ashuutosh08" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+                <svg viewBox="0 0 16 16" aria-hidden="true" class="githubIcon">
+                    <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.57 7.57 0 012 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+                <span>https://github.com/ashuutosh08</span>
+            </a>
+        </footer>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>

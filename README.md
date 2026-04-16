@@ -1,30 +1,74 @@
-# Web-Based Quiz Competition System
+# QuizlyWeb Local
 
-A responsive, browser-based quiz application developed as a Minor Project. This system automates the traditional quiz process by providing instant evaluation, scoring, and feedback without the need for manual checking.
+A lightweight, browser-based quiz app that turns your study notes into multiple-choice practice tests.
 
-## 🚀 Features
-* **Multi-Subject Support:** Users can choose from categories like Operating Systems, Python, Science, Reasoning, and Data Structures.
-* **Instant Evaluation:** Scores are calculated in real-time using JavaScript logic.
-* **Responsive Interface:** Designed with CSS to work smoothly on both desktop and mobile devices.
-* **No Backend Required:** Runs entirely in the browser using DOM manipulation and local arrays.
+No backend, no paid APIs, and no sign-up service required. Everything runs locally in your browser.
 
-## 🛠️ Technologies Used
-* **HTML5:** For the structural skeleton of the application.
-* **CSS3:** For styling, layout, and responsive design.
-* **JavaScript (ES6):** For quiz logic, event handling, and score calculation.
+## Features
 
-## 📂 How to Run
-Since this is a client-side application, you don't need to install any heavy software or servers.
+- Landing page with login or signup flow
+- Local profile system:
+  - Name
+  - Unique email
+  - 4-digit PIN
+  - Recovery question and answer
+- TXT file upload support (up to 5 MB)
+- Paste text manually or directly from clipboard
+- Automatic MCQ generation from your notes
+- Select question count (10, 12, or 15)
+- Quiz flow with:
+  - Question progress tracking
+  - Skip question option
+  - Submit anytime
+  - Final score view
+- Score history panel for recent quiz attempts
+- Persistent data using browser localStorage
+- Responsive UI for desktop and mobile
 
-1.  **Download** this repository (Click `Code` -> `Download ZIP`) or clone it.
-2.  **Unzip** the folder.
-3.  Double-click **`index.html`** to open it in your web browser.
-4.  Select a subject and start the quiz!
+## How It Works
 
-## 🔮 Future Scope
-* **User Authentication:** Adding login/signup functionality.
-* **Database Integration:** Storing questions and user scores in a database (e.g., MySQL or MongoDB).
-* **Timer Functionality:** Adding a countdown timer for each question.
+1. Create an account or log in.
+2. Upload a TXT file or paste study text.
+3. Generate quiz questions.
+4. Start quiz and answer questions.
+5. View your final score and score history.
 
-## 📄 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Project Structure
+
+- index.html: App layout and UI sections
+- style.css: Theme, animations, and responsive styling
+- script.js: App logic, auth, question generation, and quiz runtime
+
+## Run Locally
+1. Clone/download this repository.
+2. Open index.html in a browser.
+3. Create profile, upload resource, generate MCQs, and start quiz.
+
+Live Deployment: https://quizlyweb.pages.dev/
+
+## Deployment
+
+This project is static and can be hosted for free on platforms like:
+
+- GitHub Pages
+- Cloudflare Pages
+
+No build step is required.
+
+## Data & Privacy Notice
+
+All data is stored only in the current browser on the current device.
+
+If browser data is cleared, private/incognito mode is used, or you switch browser/device, saved data may be lost.
+
+## Limitations
+
+- Works best with clear, well-structured study text
+- Generated questions depend on quality of input notes
+- Data is local only unless you add external backup features
+
+## License
+
+This project is licensed under the MIT License.
+See the LICENSE file for details.
